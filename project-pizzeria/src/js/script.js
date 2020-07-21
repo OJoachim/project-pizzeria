@@ -60,6 +60,8 @@ class Product{
 	  thisProduct.data = data;
 	  thisProduct.renderInMenu();
 	  thisProduct.getElements();
+	  thisProduct.initOrderForm();
+      thisProduct.processOrder();
 	  thisProduct.initAccordion();
 	  console.log('new Product: ', thisProduct);
 	}
@@ -86,7 +88,16 @@ class Product{
 	  console.log('thisProduct', thisProduct);
 	  
 	  thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+	  thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+	  
 	  console.log('thisProduct', thisProduct.accordionTrigger);
+	  console.log('thisProduct', thisProduct.form);
+	  console.log('thisProduct', thisProduct.formInputs);
+	  console.log('thisProduct', thisProduct.cartButton);
+	  console.log('thisProduct', thisProduct.priceElem);
 	}
 	
 	initAccordion(){
@@ -122,6 +133,15 @@ class Product{
 	  
 	  }); // END: click event listener to trigger
 	  
+	}
+	
+	// metody initOrderForm i processOrder
+	initOrderForm(){
+	  const thisProduct = this;
+	}
+	
+	processOrder(){
+	  const thisProduct = this;
 	}
 	
 }
