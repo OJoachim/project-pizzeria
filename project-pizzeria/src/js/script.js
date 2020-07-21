@@ -59,6 +59,8 @@ class Product{
 	  thisProduct.id = id;
 	  thisProduct.data = data;
 	  thisProduct.renderInMenu();
+	  thisProduct.getElements();
+	  thisProduct.initAccordion();
 	  console.log('new Product: ', thisProduct);
 	}
 	
@@ -78,6 +80,50 @@ class Product{
 	  /* add element to menu */
 	  menuContainer.appendChild(thisProduct.element);
 	}
+	
+	getElements(){
+      const thisProduct = this;
+	  console.log('thisProduct', thisProduct);
+	  
+	  thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+	  console.log('thisProduct', thisProduct.accordionTrigger);
+	}
+	
+	initAccordion(){
+	  const thisProduct = this;
+	  
+	  //algorytm:
+	  /* find the clickable trigger (the element that should react to clicking) */
+	  console.log('thisProduct', thisProduct.accordionTrigger);
+	  
+	  /* START: click event listener to trigger */
+	  thisProduct.accordionTrigger.addEventListener('click', function(event) {
+	  
+	  /* prevent default action for event */
+      event.preventDefault();
+	  
+	  /* toggle active class on element of thisProduct */
+      thisProduct.element.classList.toggle('active');
+	  
+	  /* find all active products */
+      const activeProducts = document.querySelectorAll('.product.' + classNames.menuProduct.wrapperActive);  //const classNames /menuProduct: / wrapperActive: / 'active'
+	  console.log('activeProducts', activeProducts);
+	  
+	  /* START LOOP: for each active product */
+       for(const activeProduct of activeProducts) {
+		   
+	     /* START: if the active product isn't the element of thisProduct */
+         if (activeProduct != thisProduct.element) {
+		   /* remove class active for the active product */
+           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+		 } // END: if the active product isn't the element of thisProduct
+		   
+	   } // END LOOP: for each active product 
+	  
+	  }); // END: click event listener to trigger
+	  
+	}
+	
 }
 
   const app = {
