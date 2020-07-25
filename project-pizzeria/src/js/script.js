@@ -135,7 +135,7 @@
 
     }
 
-    // metody initOrderForm i processOrder (zad.2.)
+    // methods: initOrderForm i processOrder (exercise 8.2.)
     initOrderForm(){
       const thisProduct = this;
       thisProduct.form.addEventListener('submit', function(event){
@@ -147,7 +147,6 @@
           thisProduct.processOrder();
         });
       }
-
       thisProduct.cartButton.addEventListener('click', function(event){
         event.preventDefault();
         thisProduct.processOrder();
@@ -189,16 +188,12 @@
             // ELSE IF: if option is not selected and option is default
             price -= option.price; // reduct price
           }
-
         } // END LOOP: for each optionId in param.options
       } // END LOOP: for each paramId in thisProduct.data.params
-
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = price;
       console.log('PRICE', price);
-
     } //END processOrder()
-    /////////////////////////////////////////////////////////
   }
 
   const app = {
