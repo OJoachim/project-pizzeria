@@ -52,21 +52,21 @@
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   };
 
-//1
-class Product{
-	constructor(id, data){
+  //1
+  class Product{
+    constructor(id, data){
 	  const thisProduct = this;
 	  thisProduct.id = id;
 	  thisProduct.data = data;
 	  thisProduct.renderInMenu();
 	  thisProduct.getElements();
+      thisProduct.initAccordion();
 	  thisProduct.initOrderForm();
       thisProduct.processOrder();
-	  thisProduct.initAccordion();
 	  console.log('new Product: ', thisProduct);
-	}
+    }
 	
-	renderInMenu(){
+    renderInMenu(){
 	  const thisProduct = this;
 	  
 	  //algorytm
@@ -81,9 +81,9 @@ class Product{
 	  
 	  /* add element to menu */
 	  menuContainer.appendChild(thisProduct.element);
-	}
+    }
 	
-	getElements(){
+    getElements(){
       const thisProduct = this;
 	  console.log('thisProduct', thisProduct);
 	  
@@ -98,9 +98,9 @@ class Product{
 	  console.log('thisProduct', thisProduct.formInputs);
 	  console.log('thisProduct', thisProduct.cartButton);
 	  console.log('thisProduct', thisProduct.priceElem);
-	}
+    }
 	
-	initAccordion(){
+    initAccordion(){
 	  const thisProduct = this;
 	  
 	  //algorytm:
@@ -111,40 +111,94 @@ class Product{
 	  thisProduct.accordionTrigger.addEventListener('click', function(event) {
 	  
 	  /* prevent default action for event */
-      event.preventDefault();
+        event.preventDefault();
 	  
 	  /* toggle active class on element of thisProduct */
-      thisProduct.element.classList.toggle('active');
+        thisProduct.element.classList.toggle('active');
 	  
 	  /* find all active products */
-      const activeProducts = document.querySelectorAll('.product.' + classNames.menuProduct.wrapperActive);  //const classNames /menuProduct: / wrapperActive: / 'active'
+        const activeProducts = document.querySelectorAll('.product.' + classNames.menuProduct.wrapperActive);  //const classNames /menuProduct: / wrapperActive: / 'active'
 	  console.log('activeProducts', activeProducts);
 	  
 	  /* START LOOP: for each active product */
-       for(const activeProduct of activeProducts) {
+        for(const activeProduct of activeProducts) {
 		   
 	     /* START: if the active product isn't the element of thisProduct */
-         if (activeProduct != thisProduct.element) {
+          if (activeProduct != thisProduct.element) {
 		   /* remove class active for the active product */
-           activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
+            activeProduct.classList.remove(classNames.menuProduct.wrapperActive);
 		 } // END: if the active product isn't the element of thisProduct
 		   
 	   } // END LOOP: for each active product 
 	  
 	  }); // END: click event listener to trigger
 	  
-	}
+    }
+ 
+    // metody initOrderForm i processOrder (zad.2.)
+    initOrderForm(){
+	   const thisProduct = this;
+    thisProduct.form.addEventListener('submit', function(event){
+      event.preventDefault();
+      thisProduct.processOrder();
+      });
+      for(let input of thisProduct.formInputs){
+       input.addEventListener('change', function(){
+        thisProduct.processOrder();
+        });
+      }
+      
+      thisProduct.cartButton.addEventListener('click', function(event){
+       event.preventDefault();
+       thisProduct.processOrder();
+      });
+      console.log('initOrferForm:', this.initOrderForm);
+    }
 	
-	// metody initOrderForm i processOrder
-	initOrderForm(){
-	  const thisProduct = this;
-	}
-	
-	processOrder(){
-	  const thisProduct = this;
-	}
-	
-}
+    processOrder(){
+	   const thisProduct = this;
+    
+    // algorytm:
+    /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
+    const formData = utils.serializeFormToObject(thisProduct.form);
+    console.log('formData', formData);
+    
+    /* set variable price to equal thisProduct.data.price */
+    let price = thisProduct.data.price;
+    console.log('price', price);
+    
+    /* START LOOP: for each paramId in thisProduct.data.params */
+    for(let paramId in thisProduct.data.params){
+      /* save the element in thisProduct.data.params with key paramId as const param */
+      const param = thisProduct.data.params[paramId];
+      console.log('PARAM', param);
+      
+      /* START LOOP: for each optionId in param.options */
+      for(let optionId in param.options){
+        
+        /* save the element in param.options with key optionId as const option */
+        const option = param.options[optionId];
+        console.log('OPTION', option);
+        
+        /* option: selected and default */
+        const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          /* START IF: if option is selected and option is not default */
+          if (optionSelected && !option.default) {
+            price += option.price; // add price of option to variable price
+          } else if (!optionSelected && option.default) {
+            // ELSE IF: if option is not selected and option is default
+            price -= option.price; // reduct price
+          }
+        
+      } // END LOOP: for each optionId in param.options
+    } // END LOOP: for each paramId in thisProduct.data.params
+
+    /* set the contents of thisProduct.priceElem to be the value of variable price */
+    thisProduct.priceElem.innerHTML = price;
+    
+    } //END processOrder()
+	/////////////////////////////////////////////////////////
+  }
 
   const app = {
 	  
@@ -156,7 +210,7 @@ class Product{
 	  }
     },
 	
-	initData: function(){
+    initData: function(){
       const thisApp = this;
 	  
       thisApp.data = dataSource;
