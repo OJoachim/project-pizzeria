@@ -98,7 +98,7 @@
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      console.log('new Product: ', thisProduct);
+      //console.log('new Product: ', thisProduct);
     }
 
     renderInMenu(){
@@ -120,7 +120,7 @@
 
     getElements(){
       const thisProduct = this;
-      console.log('thisProduct', thisProduct);
+      //console.log('thisProduct', thisProduct);
 
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
       thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
@@ -130,12 +130,12 @@
       thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
       thisProduct.amountWidgetElem = thisProduct.element.querySelector(select.menuProduct.amountWidget);
 
-      console.log('thisProduct', thisProduct.accordionTrigger);
-      console.log('thisProduct', thisProduct.form);
-      console.log('thisProduct', thisProduct.formInputs);
-      console.log('thisProduct', thisProduct.cartButton);
-      console.log('thisProduct', thisProduct.priceElem);
-      console.log('thisProduct', thisProduct.imageWrapper);
+      //console.log('thisProduct', thisProduct.accordionTrigger);
+      //console.log('thisProduct', thisProduct.form);
+      //console.log('thisProduct', thisProduct.formInputs);
+      //console.log('thisProduct', thisProduct.cartButton);
+      //console.log('thisProduct', thisProduct.priceElem);
+      //console.log('thisProduct', thisProduct.imageWrapper);
     }
 
     initAccordion(){
@@ -189,7 +189,7 @@
         event.preventDefault();
         thisProduct.processOrder();
       });
-      console.log('initOrferForm:', this.initOrderForm);
+      //console.log('initOrferForm:', this.initOrderForm);
     }
 
     processOrder(){
@@ -198,24 +198,24 @@
       // algorytm:
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('formData', formData);
+      //console.log('formData', formData);
 
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
-      console.log('price', price);
+      //console.log('price', price);
 
       /* START LOOP: for each paramId in thisProduct.data.params */
       for(let paramId in thisProduct.data.params){
       /* save the element in thisProduct.data.params with key paramId as const param */
         const param = thisProduct.data.params[paramId];
-        console.log('PARAM', param);
+        //console.log('PARAM', param);
 
         /* START LOOP: for each optionId in param.options */
         for(let optionId in param.options){
 
           /* save the element in param.options with key optionId as const option */
           const option = param.options[optionId];
-          console.log('OPTION', option);
+          //console.log('OPTION', option);
 
           /* option: selected and default */
           const optionSelected = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
@@ -229,7 +229,7 @@
           /* selector of images contains: "." paramId "-" optionId */
           const imgSelector = '.' + paramId + '-' + optionId;
           const optionImages = thisProduct.imageWrapper.querySelectorAll(imgSelector);
-          console.log('optionImages', optionImages);
+          //console.log('optionImages', optionImages);
           if (optionSelected) {
             for (let optionImage of optionImages){
               optionImage.classList.add(classNames.menuProduct.imageVisible);
@@ -265,9 +265,9 @@
       thisWidget.value = settings.amountWidget.defaultValue;
       thisWidget.setValue(thisWidget.input.value);
       
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
-      console.log('thisWidget.value', thisWidget.value);
+      //console.log('AmountWidget:', thisWidget);
+      //console.log('constructor arguments:', element);
+      //console.log('thisWidget.value', thisWidget.value);
     }
     //met. getElements to find elements of the widget
     getElements(element){
@@ -317,7 +317,7 @@
 
     initMenu: function(){
       const thisApp = this;
-      console.log('thisApp.data:', thisApp.data);
+      //console.log('thisApp.data:', thisApp.data);
       for(let productData in thisApp.data.products){
         new Product(productData, thisApp.data.products[productData]);
       }
@@ -331,11 +331,11 @@
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
 
       thisApp.initData();
       thisApp.initMenu();
