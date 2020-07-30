@@ -260,9 +260,9 @@
       thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value; //multiply price by amount
       
       thisProduct.priceElem.innerHTML = thisProduct.price;
-      console.log('PRICE', price);
-      console.log('thisProduct.price', thisProduct.price);
-      console.log('thisProduct.params', thisProduct.params);
+      //console.log('PRICE', price);
+      //console.log('thisProduct.price', thisProduct.price);
+      //console.log('thisProduct.params', thisProduct.params);
     } //END processOrder()
     
     initAmountWidget(){
@@ -344,7 +344,7 @@
       thisCart.products = [];
       thisCart.getElements(element);
       thisCart.initActions();
-      console.log('new Cart', thisCart);
+      //console.log('new Cart', thisCart);
     }
     getElements(element){
       const thisCart = this;
@@ -363,22 +363,22 @@
     }
     add(menuProduct){
       const thisCart = this; //Zakomentowane by ESLint nie zgłaszał błędu
-      console.log('adding product', menuProduct);
+      //console.log('adding product', menuProduct);
       
       /*generate HTML based on template */
       const generatedHTML = templates.cartProduct(menuProduct); //(cartProduct)?
-      console.log('generatedHTML', generatedHTML);
+      //console.log('generatedHTML', generatedHTML);
       
       /* create DOMelement as generatedDOM using utils.createElementFromHTML */
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      console.log('generatedDOM', generatedDOM);
+      //console.log('generatedDOM', generatedDOM);
       
       /* add DOM elements to DOM do thisCart.dom.productList */
       thisCart.dom.productList.appendChild(generatedDOM);
       
       //test (dwa razy dodana ta sama instancja klasy Product, ale dwie różne instancje klasy CartProduct)
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('thisCart.products', thisCart.products);
+      //console.log('thisCart.products', thisCart.products);
     }
   }
 
@@ -393,25 +393,30 @@
       thisCartProduct.amount = menuProduct.amount;
       thisCartProduct.params = JSON.parse(JSON.stringify(menuProduct.params));
       thisCartProduct.getElements(element);
+      thisCartProduct.initAmountWidget();
       
-      console.log('new CartProduct', thisCartProduct);
-      console.log('productData', menuProduct);
+      //console.log('new CartProduct', thisCartProduct);
+      //console.log('productData', menuProduct);
     }
     getElements(element){
       const thisCartProduct = this;
        
       thisCartProduct.dom = {};
       thisCartProduct.dom.wrapper = element;
-      thisCartProduct.dom.amoutWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
     }
     initAmountWidget(){
       const thisCartProduct = this;
-      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.amountWidgetElem);
-      thisCartProduct.amountWidgetElem.addEventListener('updated', function(){
-        thisCartProduct.processOrder();
+      
+      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+      thisCartProduct.dom.amountWidget.addEventListener('updated', function(){
+        //NEW VALUES OF: thisCartProduct.amount & thisCartProduct.price
+        thisCartProduct.amount = thisCartProduct.amountWidget.value;
+        thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
+        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
       });
     } //END initAmountWidget()
   }
