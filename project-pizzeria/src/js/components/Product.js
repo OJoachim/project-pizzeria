@@ -14,7 +14,7 @@ class Product{
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
     //console.log('new Product: ', thisProduct);
-    }
+  }
 
   renderInMenu(){
     const thisProduct = this;
@@ -167,7 +167,7 @@ class Product{
         }
       } // END LOOP: for each optionId in param.options
     } // END LOOP: for each paramId in thisProduct.data.params
-      /* set the contents of thisProduct.priceElem to be the value of variable price */
+    /* set the contents of thisProduct.priceElem to be the value of variable price */
       
     thisProduct.priceSingle = price; //price of 1 product
     thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value; //multiply price by amount
