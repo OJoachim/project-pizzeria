@@ -36,14 +36,14 @@ class AmountWidget{
   initActions(){
     const thisWidget = this;
     
-    thisWidget.dom.input.addEventListener('change', function(){
+    thisWidget.input.addEventListener('change', function(){
       thisWidget.setValue(thisWidget.input.value);
     });
-    thisWidget.dom.linkDecrease.addEventListener('click', function(event){
+    thisWidget.linkDecrease.addEventListener('click', function(event){
       event.preventDefault();
       thisWidget.setValue(thisWidget.value - 1);
     });
-    thisWidget.dom.linkIncrease.addEventListener('click', function(event){
+    thisWidget.linkIncrease.addEventListener('click', function(event){
       event.preventDefault();
       thisWidget.setValue(thisWidget.value + 1);
     });
