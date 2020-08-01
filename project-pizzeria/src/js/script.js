@@ -358,10 +358,14 @@
       const thisCart = this;
       thisCart.dom = {};
       thisCart.dom.wrapper = element;
+      thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(select.cart.address);
       
       //quality: thisCart.dom.toggleTrigger, wrapper: thisCart.dom.wrapper, selector: select.cart.toggleTrigger
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
-      thisCart.dom.productList = document.querySelector(select.cart.productList);     
+      thisCart.dom.productList = document.querySelector(select.cart.productList);
+      
       thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
       for(let key of thisCart.renderTotalsKeys){
         thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
@@ -377,7 +381,41 @@
         thisCart.dom.productList.addEventListener('remove', function(){
           thisCart.remove(event.detail.cartProduct);
         });
+        thisCart.dom.form.addEventListener('submit', function(){
+          event.preventDefault();
+          thisCart.sendOrder();
+        });
       });
+    }
+    sendOrder(){
+      const thisCart = this;
+      const url = settings.db.url + '/' + settings.db.order;
+      const payload = {
+        //address: 'test',
+        phone: thisCart.dom.phone.value,
+        address: thisCart.dom.address.value,
+        totalNumber: thisCart.totalNumber,
+        subtotalPrice: thisCart.subtotalPrice,
+        deliveryFee: thisCart.deliveryFee,
+        totalPrice: thisCart.totalPrice,
+        products: [],
+      };
+      for(let product of thisCart.products)
+        payload.products.push(product.getData());
+      
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      };
+      fetch(url, options)
+        .then(function(response){
+          return response.json();
+        }).then(function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+        });
     }
     add(menuProduct){
       const thisCart = this; //Zakomentowane by ESLint nie zgłaszał błędu
@@ -487,6 +525,19 @@
         console.log(thisCartProduct.remove(event));
       });
     } //END met. initActions()
+    getData(){
+      const thisCartProduct = this;
+      const productData = {
+        OrderedItems: {
+          id: thisCartProduct.id,
+          amount: thisCartProduct.amount,
+          price: thisCartProduct.price,
+          priceSingle: thisCartProduct.priceSingle,
+          params: thisCartProduct.params,
+        },
+      };
+      return productData;
+    };
   }
 
   const app = {
@@ -509,7 +560,9 @@
         .then(function(parsedResponse){
           console.log('parsedResponse', parsedResponse);
           /* save parsedResponse as thisApp.data.products */
+          thisApp.data.products = parsedResponse;
           /* execute initMenu method */
+          thisApp.initMenu();
         });
       console.log('thisApp.data', JSON.stringify(thisApp.data));
     },
@@ -526,7 +579,7 @@
       //console.log('settings:', settings);
       //console.log('templates:', templates);
       thisApp.initData();
-      thisApp.initMenu();
+      //thisApp.initMenu(); DELATE initMenu() in app.init method
       thisApp.initCart();
     },
   };
