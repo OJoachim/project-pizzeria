@@ -45,7 +45,7 @@ class CartProduct {
       },
     });
     thisCartProduct.dom.wrapper.dispatchEvent(event);
-  }
+  } //END remove()
   initActions(){
     const thisCartProduct = this;     
     thisCartProduct.dom.edit.addEventListener('click', function(){

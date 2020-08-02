@@ -67,6 +67,7 @@ class Cart {
       },
       body: JSON.stringify(payload),
     };
+    
     fetch(url, options)
       .then(function(response){
         return response.json();
