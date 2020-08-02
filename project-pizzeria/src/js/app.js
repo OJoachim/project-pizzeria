@@ -6,6 +6,7 @@ const app = {
   initMenu: function(){
     const thisApp = this;
     //console.log('thisApp.data:', thisApp.data);
+    
     for(let productData in thisApp.data.products){
       new Product(productData, thisApp.data.products[productData]);
     }
@@ -45,6 +46,7 @@ const app = {
     //console.log('classNames:', classNames);
     //console.log('settings:', settings);
     //console.log('templates:', templates);
+    
     thisApp.initData();
     //thisApp.initMenu(); DELATE initMenu() in app.init method
     thisApp.initCart();
