@@ -1,4 +1,4 @@
-import {templates, select/*, settings, classNames*/} from '../settings.js';
+import {templates, select} from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from '../components/AmountWidget.js';
 
@@ -8,7 +8,6 @@ class Booking {
     
     thisBooking.render(bookingElement);
     thisBooking.initWidgets();
-    
   }
   
   render(bookingElement){
@@ -19,7 +18,7 @@ class Booking {
     thisBooking.dom = {};
     thisBooking.dom.wrapper = bookingElement;
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
-    //thisBooking.dom.wrapper.appendChild(generatedDom);
+    
     thisBooking.dom.peopleAmount =  document.querySelector(select.booking.peopleAmount);
     thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
   }

@@ -11,7 +11,6 @@ const app = {
     thisApp.navLinks = document.querySelectorAll(select.nav.links); //to find all links
     
     const idFromHash = window.location.hash.replace('#/', '');
-    //console.log('idFromHash', idFromHash);
     
     let pageMatchingHash = thisApp.pages[0].id;
     for(let page of thisApp.pages){
@@ -22,7 +21,6 @@ const app = {
     }
     
     //met. which activate page
-    //CHANGE: thisApp.activatePage(thisApp.pages[0].id);
     thisApp.activatePage(pageMatchingHash);
     
     for(let link of thisApp.navLinks){
@@ -58,13 +56,12 @@ const app = {
   },
   initBooking: function(){
   const thisApp = this;
-  //znajduje kontener widgeta
+  
   thisApp.bookingElement = document.querySelector(select.containerOf.booking);
-  thisApp.booking = new Booking(thisApp.bookingElement); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
+  thisApp.booking = new Booking(thisApp.bookingElement); 
   },
   initMenu: function(){
     const thisApp = this;
-    //console.log('thisApp.data:', thisApp.data);
     
     for(let productData in thisApp.data.products){
       new Product(productData, thisApp.data.products[productData]);
@@ -72,7 +69,7 @@ const app = {
   },
   initData: function(){
     const thisApp = this;
-    thisApp.data = {}; //dataSource; CHANGE TO: {};
+    thisApp.data = {};
     const url = settings.db.url + '/' + settings.db.product;
       
     fetch(url)
@@ -108,7 +105,6 @@ const app = {
     
     thisApp.initPages();
     thisApp.initData();
-    //thisApp.initMenu(); DELATE initMenu() in app.init method
     thisApp.initCart();
     thisApp.initBooking();
   },
