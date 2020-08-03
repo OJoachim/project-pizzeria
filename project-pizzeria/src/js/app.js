@@ -23,7 +23,7 @@ const app = {
     
     //met. which activate page
     //CHANGE: thisApp.activatePage(thisApp.pages[0].id);
-    thisApp.activatePage(idFromHash);
+    thisApp.activatePage(pageMatchingHash);
     
     for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
