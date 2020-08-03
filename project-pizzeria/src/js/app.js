@@ -51,16 +51,16 @@ const app = {
     /* add class "active" to matching link & remove class "activ" from non-matching links */
     for(let link of thisApp.navLinks){
       link.classList.toggle(
-      classNames.nav.active, 
-      link.getAttribute('href') == '#' + pageId
+        classNames.nav.active, 
+        link.getAttribute('href') == '#' + pageId
       );
     }
   },
   initBooking: function(){
     const thisApp = this;
     //znajduje kontener widgeta
-    const bookingElem = document.querySelector(select.containerOf.booking);
-    thisApp.booking = new Booking(bookingElem); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
+    const bookingElement = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(bookingElement); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
   },
   initMenu: function(){
     const thisApp = this;
