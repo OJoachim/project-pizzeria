@@ -1,13 +1,14 @@
-//import {templates, select/*, settings, classNames*/} from '../settings.js';
-//import utils from '../utils.js';
-//import AmountWidget from '../components/AmountWidget.js';
+import {templates, select/*, settings, classNames*/} from '../settings.js';
+import utils from '../utils.js';
+import AmountWidget from '../components/AmountWidget.js';
 
-/*class Booking {
+class Booking {
   constructor(bookingElement){
     const thisBooking = this;
     
-    thisBooking.initWidgets();
     thisBooking.render(bookingElement);
+    thisBooking.initWidgets();
+    
   }
   
   render(bookingElement){
@@ -17,8 +18,8 @@
      
     thisBooking.dom = {};
     thisBooking.dom.wrapper = bookingElement;
-    const generatedDom = utils.createDOMFromHTML(generatedHTML);
-    thisBooking.dom.wrapper.appendChild(generatedDom);
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
+    //thisBooking.dom.wrapper.appendChild(generatedDom);
     thisBooking.dom.peopleAmount =  document.querySelector(select.booking.peopleAmount);
     thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
   }
@@ -33,4 +34,4 @@
    
 }
 
-export default Booking; */
+export default Booking;
