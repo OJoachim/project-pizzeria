@@ -60,11 +60,11 @@ class CartProduct {
   getData(){
     const thisCartProduct = this;
     const productData = { //ordered products items:
-        id: thisCartProduct.id,
-        amount: thisCartProduct.amount,
-        price: thisCartProduct.price,
-        priceSingle: thisCartProduct.priceSingle,
-        params: thisCartProduct.params,
+      id: thisCartProduct.id,
+      amount: thisCartProduct.amount,
+      price: thisCartProduct.price,
+      priceSingle: thisCartProduct.priceSingle,
+      params: thisCartProduct.params,
     };
     return productData;
   }
