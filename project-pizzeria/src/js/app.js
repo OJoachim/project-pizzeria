@@ -1,7 +1,7 @@
 import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
-import Booking from './components/Booking.js';
+//import Booking from './components/Booking.js';
 
 const app = {
   initPages: function(){
@@ -56,12 +56,12 @@ const app = {
       );
     }
   },
-  initBooking: function(){
-    const thisApp = this;
-    //znajduje kontener widgeta
-    thisApp.bookingElement = document.querySelector(select.containerOf.booking);
-    thisApp.booking = new Booking(thisApp.bookingElement); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
-  },
+  //initBooking: function(){
+  //const thisApp = this;
+  //znajduje kontener widgeta
+  //thisApp.bookingElement = document.querySelector(select.containerOf.booking);
+  //thisApp.booking = new Booking(thisApp.bookingElement); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
+  //},
   initMenu: function(){
     const thisApp = this;
     //console.log('thisApp.data:', thisApp.data);
@@ -110,7 +110,7 @@ const app = {
     thisApp.initData();
     //thisApp.initMenu(); DELATE initMenu() in app.init method
     thisApp.initCart();
-    thisApp.initBooking();
+    //thisApp.initBooking();
   },
 };
 app.init();

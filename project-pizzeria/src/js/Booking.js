@@ -1,8 +1,8 @@
-import {templates, select/*, settings, classNames*/} from '../settings.js';
-import utils from '../utils.js';
-import AmountWidget from '../components/AmountWidget.js';
+//import {templates, select/*, settings, classNames*/} from '../settings.js';
+//import utils from '../utils.js';
+//import AmountWidget from '../components/AmountWidget.js';
 
-class Booking {
+/*class Booking {
   constructor(bookingElement){
     const thisBooking = this;
     
@@ -33,4 +33,4 @@ class Booking {
    
 }
 
-export default Booking;
+export default Booking; */
