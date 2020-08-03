@@ -59,8 +59,8 @@ const app = {
   initBooking: function(){
     const thisApp = this;
     //znajduje kontener widgeta
-    const bookingElement = document.querySelector(select.containerOf.booking);
-    thisApp.booking = new Booking(bookingElement); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
+    thisApp.bookingElement = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(thisApp.bookingElement); //tworz. nową instancję kl. Booking, przekazując jej konstruktorowi znaleziony kontener widgetu, 
   },
   initMenu: function(){
     const thisApp = this;
