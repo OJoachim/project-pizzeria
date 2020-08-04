@@ -7,7 +7,7 @@ const app = {
   initPages: function(){
     const thisApp = this;
     
-    thisApp.pages = document.querySelector(select.containerOf.pages).children; //to find all page-containers in pages container
+    thisApp.pages = document.querySelector(select.containerOf.pages).children; //to find all page-containers in pages container, SECOND WAY - LINE 10: document.querySelectorAll('#pages section');
     thisApp.navLinks = document.querySelectorAll(select.nav.links); //to find all links
     
     const idFromHash = window.location.hash.replace('#/', '');
@@ -45,6 +45,10 @@ const app = {
     /* add class "active" to matching page & remove class "activ" from non-matching pages */
     for(let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
+      /* OTHER WAY TO DO LINE 47:
+      if(page.id === pageId) page.classList.add(classNames.pages.active);
+      else page.classList.remove(classNames.pages.active);
+      */
     }
     /* add class "active" to matching link & remove class "activ" from non-matching links */
     for(let link of thisApp.navLinks){
@@ -52,6 +56,10 @@ const app = {
         classNames.nav.active, 
         link.getAttribute('href') == '#' + pageId
       );
+      /* OTHER WAY TO DO LINE 55-58:
+      if(link.getAttribute('href') === '#' + pageId) link.classList.add(classNames.pages.active);
+      else link.classList.remove(classNames.pages.active);
+      */
     }
   },
   initBooking: function(){

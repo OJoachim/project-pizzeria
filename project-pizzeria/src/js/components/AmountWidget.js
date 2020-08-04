@@ -1,5 +1,5 @@
 import {settings, select} from '../settings.js';
-import BaseWidget from './components/BaseWidget.js';
+import BaseWidget from '../components/BaseWidget.js';
 
 
 class AmountWidget extends BaseWidget{
@@ -26,21 +26,35 @@ class AmountWidget extends BaseWidget{
   //met. to set up new value of the widget
   setValue(value){
     const thisWidget = this;
-    const newValue = parseInt(value);
+    const newValue = thisWidget.parseInt(value);
     
     /* TODO: Add validation */
-    if(newValue !=thisWidget.value && newValue >= settings.amountWidget.defaultMin && newValue <= settings.amountWidget.defaultMax){
+    if(newValue !=thisWidget.value && thisWidget.isValid(newValue)){
       thisWidget.value = newValue;
       thisWidget.announce();
     }
-    thisWidget.input.value = thisWidget.value;
+    thisWidget.renderValue();
   }
+  
+  isValid(value){
+    return !isNaN(value)
+      && value >= settings.amountWidget.defaultMin 
+      && value <= settings.amountWidget.defaultMax;
+  }
+  
+  renderValue(){
+    const thisWidget = this;
+    
+    thisWidget.dom.input.value = thisWidget.value;
+  }
+  
   //met. initActions() - to add reaction to events
   initActions(){
     const thisWidget = this;
     
     thisWidget.input.addEventListener('change', function(){
-      thisWidget.setValue(thisWidget.input.value);
+      //thisWidget.setValue(thisWidget.input.value);
+      thisWidget.value(thisWidget.dom.input.value);
     });
     thisWidget.linkDecrease.addEventListener('click', function(event){
       event.preventDefault();
