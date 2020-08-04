@@ -55,10 +55,10 @@ const app = {
     }
   },
   initBooking: function(){
-  const thisApp = this;
+    const thisApp = this;
   
-  thisApp.bookingElement = document.querySelector(select.containerOf.booking);
-  thisApp.booking = new Booking(thisApp.bookingElement); 
+    thisApp.bookingElement = document.querySelector(select.containerOf.booking);
+    thisApp.booking = new Booking(thisApp.bookingElement); 
   },
   initMenu: function(){
     const thisApp = this;
