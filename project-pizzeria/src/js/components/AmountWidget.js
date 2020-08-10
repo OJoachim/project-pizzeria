@@ -1,5 +1,5 @@
 import {settings, select} from '../settings.js';
-import BaseWidget from '../components/BaseWidget.js';
+import BaseWidget from './BaseWidget.js';
 
 
 class AmountWidget extends BaseWidget{
@@ -13,7 +13,7 @@ class AmountWidget extends BaseWidget{
     
     //console.log('AmountWidget:', thisWidget);
     //console.log('constructor arguments:', element);
-    //console.log('thisWidget.value', thisWidget.value);
+    console.log('thisWidget.value', thisWidget.value);
   }
   //met. getElements to find elements of the widget
   getElements(){
@@ -26,7 +26,7 @@ class AmountWidget extends BaseWidget{
   //met. to set up new value of the widget
   setValue(value){
     const thisWidget = this;
-    const newValue = thisWidget.parseInt(value);
+    const newValue = thisWidget.parseValue(value);
     
     /* TODO: Add validation */
     if(newValue !=thisWidget.value && thisWidget.isValid(newValue)){
@@ -52,27 +52,26 @@ class AmountWidget extends BaseWidget{
   initActions(){
     const thisWidget = this;
     
-    thisWidget.input.addEventListener('change', function(){
-      //thisWidget.setValue(thisWidget.input.value);
-      thisWidget.value(thisWidget.dom.input.value);
+    thisWidget.dom.input.addEventListener('change', function(){
+      thisWidget.setValue(thisWidget.dom.input.value);
     });
-    thisWidget.linkDecrease.addEventListener('click', function(event){
+    thisWidget.dom.linkDecrease.addEventListener('click', function(event){
       event.preventDefault();
       thisWidget.setValue(thisWidget.value - 1);
     });
-    thisWidget.linkIncrease.addEventListener('click', function(event){
+    thisWidget.dom.linkIncrease.addEventListener('click', function(event){
       event.preventDefault();
       thisWidget.setValue(thisWidget.value + 1);
     });
   }
-  announce(){
+  /* announce(){
     const thisWidget = this;
     //const event = new Event('updated'); CHANGE TO:
     const event = new CustomEvent('updated', {
       bubbles: true
     });
     thisWidget.element.dispatchEvent(event);
-  }
+  } */
 }
 
 export default AmountWidget;

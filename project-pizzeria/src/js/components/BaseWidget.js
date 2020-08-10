@@ -3,7 +3,7 @@ class BaseWidget{
     const thisWidget = this;
     
     thisWidget.dom = {}; //all el dom which we use in aplic.
-    thisWidget.dom.wrapper = wrapperElement;thisWidget;  //wrapper given to construct.at the moment of new-inst creation
+    thisWidget.dom.wrapper = wrapperElement; //wrapper given to construct.at the moment of new-inst creation
     thisWidget.correctValue = initialValue;
   }
   
@@ -15,7 +15,7 @@ class BaseWidget{
   
   set value(value){
     const thisWidget = this;
-    const newValue = thisWidget.parseInt(value);
+    const newValue = thisWidget.parseValue(value);
     
     /* TODO: Add validation */
     if(newValue !=thisWidget.correctValue && thisWidget.isValid(newValue)){
@@ -51,7 +51,7 @@ class BaseWidget{
     const event = new CustomEvent('updated', {
       bubbles: true
     });
-    thisWidget.element.dispatchEvent(event);
+    thisWidget.dom.wrapper.dispatchEvent(event);///////////////////
   }
 }
 
