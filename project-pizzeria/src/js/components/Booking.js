@@ -11,6 +11,7 @@ class Booking {
     thisBooking.render(bookingElement);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.choiseOfTable();
     
     //console.log('thisBooking', thisBooking);
     //console.log('bookingElement', bookingElement);
@@ -97,7 +98,7 @@ class Booking {
       }
     }
     
-    console.log('thisBooking.booked', thisBooking.booked);
+    //console.log('thisBooking.booked', thisBooking.booked);
     thisBooking.updateDOM();
   }
   
@@ -120,6 +121,7 @@ class Booking {
       thisBooking.booked[date][hourBlock].push(table);
     }
   }
+  
   
   updateDOM(){
     const thisBooking = this;
@@ -170,8 +172,12 @@ class Booking {
     
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
-    
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
+    
+    thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector(select.booking.submit);
   }
   
   initWidgets(){
@@ -185,7 +191,78 @@ class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
     });
-  }     
+  }
+  
+  choiseOfTable(){
+    const thisBooking = this;
+    
+    for(let table of thisBooking.dom.tables){
+      table.addEventListener('click', function(event){
+        event.preventDefault();
+        
+        if(table.classList.contains(classNames.booking.tableBooked)){
+          return alert('This table is not accessible!'); //already booked imposible to book second times
+        } else {
+          table.classList.add(classNames.booking.tableBooked);  // add class and book
+          
+          //number of booked table:
+          const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+          thisBooking.bookedTable = tableNumber;
+        }
+      });
+    }
+  }
+  
+  
+  sendMyBooking(){
+    const thisBooking = this;
+    
+    const url = settings.db.url + '/' + settings.db.booking;
+    
+    const myBookingDates = { // playload
+      date: thisBooking.DatePicker.value,
+      hour: thisBooking.hourPicker.value,
+      table: thisBooking.tableNumber,
+      peopleAmount: thisBooking.peopleAmount.value,
+      duration: thisBooking.hourAmount.value,
+      starters: [],
+      address: thisBooking.dom.address.value,
+      phone: thisBooking.dom.phone.value,
+    };
+     
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(myBookingDates),
+    };
+     
+    fetch(url, options)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+      });
+  }
+  
+  /* na potem
+    tableRezervation(clickedTable){
+    thisBooking.dom.submit.addEventListener('click', function(event){
+      event.preventDefault();
+      thisBooking.sendMyBooking(clickedTable);
+    });
+  }
+    */
 }
 
 export default Booking;
+
+/*
+-po wybraniu daty i godz można kliknąć na stolik 
+- kliknięcie nadaje klasę tableBooked
+-można zaznaczyć opcje ilości ludzi i czasu(duration)
+- można wysłać do serwerw zamów. to zwraca odp. i zajęty już stolik przy kliknięciu "powie": zajęty
+-przy zmianie godz. klasa zajęty jest usuwana.
+*/
