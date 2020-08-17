@@ -63,7 +63,7 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
-    starters: '.starters',
+    starters: '.starters',    
     phone: '[name="phone"]',
     address: '[name="address"]',
     form: '.booking-form',
@@ -118,7 +118,6 @@ export const settings = {
     product: 'product',
     order: 'order',
     booking: 'booking',
-    
     event: 'event',
     dateStartParamKey: 'date_gte',
     dateEndParamKey: 'date_lte',

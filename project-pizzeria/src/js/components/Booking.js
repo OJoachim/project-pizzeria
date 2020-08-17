@@ -173,11 +173,13 @@ class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+    
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
     
-    thisBooking.dom.submit = thisBooking.dom.wrapper.querySelector(select.booking.submit);
+    thisBooking.dom.form = thisBooking.dom.wrapper.querySelector(select.booking.form);
   }
   
   initWidgets(){
@@ -190,6 +192,11 @@ class Booking {
     
     thisBooking.dom.wrapper.addEventListener('updated', function(){
       thisBooking.updateDOM();
+    });
+    
+    thisBooking.dom.form.addEventListener('submit', function(event){
+      event.preventDefault();
+      thisBooking.sendMyBooking();
     });
   }
   
@@ -218,18 +225,27 @@ class Booking {
     const thisBooking = this;
     
     const url = settings.db.url + '/' + settings.db.booking;
-    
+      
     const myBookingDates = { // playload
-      date: thisBooking.DatePicker.value,
+      date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
-      table: thisBooking.tableNumber,
-      peopleAmount: thisBooking.peopleAmount.value,
-      duration: thisBooking.hourAmount.value,
-      starters: [],
+      table: parseInt(thisBooking.bookedTable),
+      ppl: thisBooking.peopleAmount.value,
+      duration: thisBooking.hoursAmount.value,
+      starters: ['lemonWater', 'bread'],
       address: thisBooking.dom.address.value,
       phone: thisBooking.dom.phone.value,
-    };
-     
+   };
+   
+    for (let starter of thisBooking.dom.starters){
+      if (starter.checked == true){
+        myBookingDates.starters.push(starter.value);
+      }
+    }
+    
+ 
+    //starters = ['lemonWater', 'bread'];
+    
     const options = {
       method: 'POST',
       headers: {
@@ -246,15 +262,6 @@ class Booking {
         console.log('parsedResponse', parsedResponse);
       });
   }
-  
-  /* na potem
-    tableRezervation(clickedTable){
-    thisBooking.dom.submit.addEventListener('click', function(event){
-      event.preventDefault();
-      thisBooking.sendMyBooking(clickedTable);
-    });
-  }
-    */
 }
 
 export default Booking;
