@@ -122,7 +122,6 @@ class Booking {
     }
   }
   
-  
   updateDOM(){
     const thisBooking = this;
     
@@ -175,6 +174,7 @@ class Booking {
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
     
     thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
+    console.log('thisBooking.dom.starters', thisBooking.dom.starters);
     
     thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
     thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
@@ -220,7 +220,6 @@ class Booking {
     }
   }
   
-  
   sendMyBooking(){
     const thisBooking = this;
     
@@ -232,19 +231,17 @@ class Booking {
       table: parseInt(thisBooking.bookedTable),
       ppl: thisBooking.peopleAmount.value,
       duration: thisBooking.hoursAmount.value,
-      starters: ['lemonWater', 'bread'],
+      starters: [],              //starters: ['water', 'bread'],
       address: thisBooking.dom.address.value,
       phone: thisBooking.dom.phone.value,
-   };
-   
+    };
+    
+    
     for (let starter of thisBooking.dom.starters){
-      if (starter.checked == true){
+      if (starter.checked){
         myBookingDates.starters.push(starter.value);
       }
-    }
-    
- 
-    //starters = ['lemonWater', 'bread'];
+    } 
     
     const options = {
       method: 'POST',
@@ -265,11 +262,3 @@ class Booking {
 }
 
 export default Booking;
-
-/*
--po wybraniu daty i godz można kliknąć na stolik 
-- kliknięcie nadaje klasę tableBooked
--można zaznaczyć opcje ilości ludzi i czasu(duration)
-- można wysłać do serwerw zamów. to zwraca odp. i zajęty już stolik przy kliknięciu "powie": zajęty
--przy zmianie godz. klasa zajęty jest usuwana.
-*/

@@ -63,7 +63,7 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
-    starters: '.starters',    
+    starters: '.checkbox [name="starter"]',
     phone: '[name="phone"]',
     address: '[name="address"]',
     form: '.booking-form',
@@ -112,6 +112,7 @@ export const settings = {
   },
   booking: {
     tableIdAttribute: 'data-table',
+    starterIdAttribute: 'value',
   },
   db: {
     url: '//localhost:3131',
