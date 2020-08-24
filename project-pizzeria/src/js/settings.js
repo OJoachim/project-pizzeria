@@ -11,6 +11,7 @@ export const select = {
     cart: '#cart',
     pages: '#pages',
     booking: '.booking-wrapper',
+    mainPage: '.main-page-wrapper-container',
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -39,6 +40,7 @@ export const select = {
       wrapper: '.hour-picker',
       input: 'input[type="range"]',
       output: '.output',
+      slider: '.rangeSlider',
     },
   },
   cart: {
@@ -92,6 +94,11 @@ export const classNames = {
   pages: {
     active: 'active',
   },
+  //slidercolors: {
+  //red: '.red',
+  //ogange: '.orange',
+  //green: '.green',
+  //},
 };
 
 export const settings = {

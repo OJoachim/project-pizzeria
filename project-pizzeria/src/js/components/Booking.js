@@ -256,6 +256,7 @@ class Booking {
         console.log('parsedResponse', parsedResponse);
       });
   }
+
 }
 
 export default Booking;
