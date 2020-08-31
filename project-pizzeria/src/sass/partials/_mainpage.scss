@@ -97,27 +97,37 @@
 
 .carousel-image-holder img {
   object-fit: cover;
-  height: 192px;
-  width: 192px;
+  min-height: 192px;
+  width: 100%;
   border-radius: $radius;
 }
 
 .carousel-review-wrapper {
-  height: 192px;
+  height: 100%;
+  min-height: 192px;
   margin-left: 48px;
   width: 100%;
-
-  .review-title {
-    text-transform: uppercase;
-    font-weight: $font-semibold;
-  }
-
-  .review-name {
-    margin-top: 28px;
-    font-style: italic;
-    font-weight: $font-normal;
-  }
+  min-width: 192px;
+  background-color: transparent;
 }
+  
+.author, .title, .text {
+  display: block;
+  text-align: center;
+}
+
+.title {
+  margin-top: 20px;
+  text-transform: uppercase;
+  font-weight: $font-semibold;
+}
+
+.author {
+  margin-top: 28px;
+  font-style: italic;
+  font-weight: $font-normal;
+}
+
 
 .carousel-dots {
   @include flex(row, center, center);

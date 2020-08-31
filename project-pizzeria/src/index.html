@@ -7,8 +7,9 @@
   <title>Pizzeria</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="vendor/range-slider.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"> <!-- date picker in DatePicker.js -->
+  <link rel="stylesheet" href="vendor/range-slider.min.css"> <!-- hour picker in HourPicker.js -->
+  <link rel="stylesheet" href="vendor/flickity.min.css" media="screen"> <!-- carousel in section: main-page & MainPage.js -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -62,46 +63,58 @@
     </div>
   </header>
   <div id="pages">
-    <section id="main-page">
-      
+    <section id="main-page"><!-- Begining of section: main-page -->     
       <div class="main-page-wrapper container">
+        <!-- -------------------------------------- -->
         <div class="links-wrapper">
           <div class="link-wrapper link-wrapper__order">
-            <a href="#order" class="nav-link">
+            <a href="#order" class="nav-link nav-link-order">
               <h2 class="nav-link__subtitle">order online</h2>
               <p class="nav-link__hidden-subtitle">Delicious food right to your door</p>
             </a>
           </div>
           <div class="link-wrapper link-wrapper__booking">
-            <a href="#booking" class="nav-link">
+            <a href="#booking" class="nav-link nav-link-booking">
               <h2 class="nav-link__subtitle">book a table</h2>
               <p class="nav-link__hidden-subtitle">Eat at our restaurant</p>
             </a>
           </div>
         </div>
+        <!-- -------------------------------------- -->
         <div class="hours-wrapper">
           <div class="hours">
             <h2>opening hours:</h2>
             <p>tue - sun, 12pm - 12am</p>
           </div>
         </div>
+        <!-- -------------------------------------- -->
         <div class="carousel-container">
           <div class="carousel-wrapper">
             <div class="carousel-image-holder carousel-box">
               <img src="images/main/pizza-3.jpg" alt="people eating pizza">
             </div>
-            <div class="carousel-review-wrapper carousel-box">
-              <p class="review-title"></p>
-              <p class="review-text"></p>
-              <p class="review-name"></p>
+            <div class="carousel-review-wrapper carousel-box main-carousel">   <!-- the container of opinions = main-carousel -->
+              <div class="carousel-cell">
+                <div class="title flickity-slider">
+                  <div class="title">tytulik</div>
+                  <div class="text">loren...</div>
+                  <div class="author">ala x</div>
+                </div>            
+                <div class="text flickity-slider">
+                  <div class="title">tytulik</div>
+                  <div class="text">loren...loren</div>
+                  <div class="author">ala x</div>
+                </div>
+                <div class="name flickity-slider">
+                  <div class="title">tytulik</div>
+                  <div class="text">loren...loren</div>
+                  <div class="author">ala x</div>
+                </div>        
+              </div>
             </div>
           </div>
-          <div class="carousel-dots">
-            <i id="dot-1" class="fas fa-circle"></i>
-            <i id="dot-2" class="fas fa-circle"></i>
-            <i id="dot-3" class="fas fa-circle"></i>
-          </div>
         </div>
+        <!-- -------------------------------------- -->
         <div class="gallery-wrapper">
           <div class="gal-image-wrapper">
             <img class="gallery-image" src="images/main/pizza-4.jpg" alt="pizza">
@@ -146,12 +159,13 @@
             </div>
           </div>
         </div>
+        <!-- -------------------------------------- -->
         <div class="footer">
           <a href="#">View more on Instagram</a>
         </div>
-      </div>
-      
-    </section>
+        <!-- -------------------------------------- -->
+      </div>      
+    </section><!-- end of section: main-page -->
     
     <section id="order">
       <div id="product-list" class="product-list container"></div>
@@ -336,8 +350,9 @@
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="vendor/range-slider.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> <!-- date picker in DatePicker.js -->
+  <script src="vendor/flickity.pkgd.min.js"></script> <!-- carousel in section: main-page & MainPage.js -->
+  <script src="vendor/range-slider.min.js"></script> <!-- hour picker in HourPicker.js -->
   <script src="js/app.js" type="module"></script>
 </body>
 </html>

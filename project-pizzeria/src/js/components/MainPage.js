@@ -1,5 +1,7 @@
-import {templates, select} from '../settings.js';
-import utils from '../utils.js';
+/* eslint-disable-next-line no-unused-vars */
+/* global Flickity */
+import {/*templates,*/ settings, classNames, select} from '../settings.js';
+//import utils from '../utils.js';
 
 class MainPage {
   constructor(){
@@ -7,82 +9,85 @@ class MainPage {
     
     thisMainPage.getElements();
     thisMainPage.getData();
-  }
+    thisMainPage.makeLinksActive();
+    thisMainPage.makeCarousel();
+  } 
   
+  makeLinksActive(){  //make nav-link: nav-link-order & nav-link-booking active at the 'click' moment
+    const thisMainPage = this;
+    thisMainPage.inMainPageLinks = document.querySelectorAll(select.inMainPageLinks); //to find all links
+    
+    const linkOrder = document.querySelector('.nav-link-order');
+    const linkBooking = document.querySelector('.nav-link-booking');
+    
+    const linkOrderId = linkOrder.getAttribute('href').replace('#', ''); //href="#order"
+    const linkBookingId = linkBooking.getAttribute('href').replace('#', ''); //href="#booking"
+    
+    const pages = document.querySelector(select.containerOf.pages).children; // all my pages
+    
+    //first case - click on linkOrder: .nav-link-order
+    linkOrder.addEventListener('click', function(){
+      for(let page of pages){
+        if(page.id === linkOrderId){
+          page.classList.add(classNames.pages.active);
+        } else {
+          page.classList.remove(classNames.pages.active);
+        }
+      }
+    });
+    //second case - click on linkBooking: .nav-link-booking
+    linkBooking.addEventListener('click', function(){
+      for(let page of pages){
+        if(page.id === linkBookingId){
+          page.classList.add(classNames.pages.active);
+        } else {
+          page.classList.remove(classNames.pages.active);
+        }
+      }
+    });
+  }
   
   getElements(){
-    const thisMainPage = this;
-
-    thisMainPage.imagesList = document.querySelector(select.containerOf.image);
-    thisMainPage.opinionList = document.querySelector(select.containerOf.opinions);
-    thisMainPage.carouselCircle = document.querySelector(select.containerOf.carouselCircle);
+    const thisMainPage = this; 
+    thisMainPage.opinion = document.querySelector(select.containerOf.opinion);
   }
+  
   getData(){
-    const thisMainPage = this;
-
-    const urlFirst = select.db.url + '/' + select.db.gallery;
-    const urlSecond = select.db.url + '/' + select.db.opinions;
-
-    fetch(urlFirst)
-      .then(function(rawResponse) {
+    //const thisMainPage = this;
+    const url = settings.db.url + '/' + settings.db.opinion;
+    
+    fetch(url)
+      .then(function(rawResponse){
         return rawResponse.json();
       })
-      .then(function(parsedResponse) {
-        thisMainPage.dataImages = parsedResponse;
-        //console.log('data from API: ', thisMainPage.dataImages);
-        thisMainPage.renderImagesList();
+      .then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+        return parsedResponse;
       });
-    fetch(urlSecond)
-      .then(function (rawResponse) {
-        return rawResponse.json();
-      })
-      .then(function (parsedResponse) {
-        thisMainPage.dataOpinions = parsedResponse;
-        thisMainPage.renderOpinionsList();
-      });
-
-  }
-  renderImagesList(){
-    const thisMainPage = this;
-    
-  }
-  renderOpinionsList() {
-    const thisMainPage = this;
-
+      
   }
   
-  toSlide(){
-    const thisMainPage = this;
-    
-    thisMainPage.circleList = thisMainPage.options.querySelectorAll('li');
-    
-    for(let circle of thisMainPage.circleList) {
-      
-      circle.addEventListener('click', function(event){
-        event.preventDefault();
-        thisMainPage.changeCircle(event);
+  //const opinion = {
+  //title: thisMainPage.title,
+  //text: thisMainPage.text,
+  //author: thisMainPage.author,
+  //}
+  
+  makeCarousel(){
+    /* eslint-disable-next-line no-unused-vars */
+    const thisMainPage = this;    
+    const element = document.querySelector('.carousel-cell');
+    /* eslint-disable-next-line no-unused-vars */
+    const flkty = new Flickity(element, 
+      {
+      // options:
+        autoPlay: true, // advance cells every 3 seconds
+        wrapAround: true,
+        contain: true,
+        draggable: true,
+        //prevNextButtons: false,
       });
-    }
-    thisMainPage.opinions = document.querySelectorAll('.opinion');
-
-    opinionStatus function(){
-      const opinionId = 0;
-      let selectOpinion = thisMainPage.opinions[opinionId];
-      let selectCircle = thisMainPage.circleList[opinionId];
-      
-      selectCircle.classList.remove('active');
-      selectCircle = thisMainPage.circleList[opinionNumber];
-      selectCircle.classList.add('active');
   }
   
-  changeTheOpinion() {
-    const clickedElement = event.target;
-    const opinionClass = clickedElement.getAttribute('data-option');
-    const selectOpinion = document.querySelector('.' + opinionClass);
-    const activeOpinion = document.querySelector('.option.active');
-    activeOpinion.classList.remove('active');
-    selectOpinion.classList.add('active');
-  }
- 
 }
 export default MainPage;

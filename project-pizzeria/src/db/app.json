@@ -266,5 +266,25 @@
       "ppl": 3,
       "starters": ["lemonWater"]
     }
+  ],
+  "opinion": [
+    {
+      "id": 1,
+      "title": "Amazing service",
+      "text": "loren ipsum... text...",
+      "author": "- M.Osborne"
+    },
+    {
+      "id": 2,
+      "title": "Supper service",
+      "text": "loren ipsum... text...",
+      "author": "- M.Mol"
+    },
+    {
+      "id": 3,
+      "title": "Amazing food",
+      "text": "loren ipsum... text...",
+      "author": "- M.Olik"
+    }
   ]
 }

@@ -11,7 +11,8 @@ export const select = {
     cart: '#cart',
     pages: '#pages',
     booking: '.booking-wrapper',
-    mainPage: '.main-page-wrapper-container',
+    mainPage: '.main-page-wrapper .container',
+    opinion: '.carousel-review-wrapper .main-carousel',
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -73,6 +74,7 @@ export const select = {
   },
   nav: {
     links: '.main-nav a',
+    inMainPageLinks: '.links-wrapper a',
   },
 };
 
@@ -94,11 +96,11 @@ export const classNames = {
   pages: {
     active: 'active',
   },
-  //slidercolors: {
-  //red: '.red',
-  //ogange: '.orange',
-  //green: '.green',
-  //},
+  colors: {
+    color1: '.red',
+    color2: '.orange',
+    color3: '.green',
+  },
 };
 
 export const settings = {
@@ -130,6 +132,13 @@ export const settings = {
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
+    
+    opinion: 'opinion',
+    theOpinion: {
+      title: '.title',
+      text: '.text',
+      author: '.author',
+    },
   },
 };
 
