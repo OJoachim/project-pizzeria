@@ -1,3 +1,6 @@
+#main-page {
+  backgraund: #dd9d90;
+}
 
 .main-page-wrapper {
   margin: 40px auto;
@@ -128,17 +131,29 @@
 .opinion-title,
 .opinion-text,
 .opinion-author {
-  margin-left: 10px;
-  margin-top: 5px;
+  margin-left: 20px;
+  margin-top: 10px;
+  padding-bottom: 15px;
+}
+
+.opinion-title {
+  font-size: 120%;
+}
+
+.opinion-author {
+  font-size: 90%;
 }
 
 /* The dots */
-.dot-container {
+.dot-box {
+  margin: 0 auto;
+  display: flex;
+  margin-left: 70%;
 }
 
 .dot {
   cursor: pointer;
-  text-align:center;
+  text-align: center;
   height: 15px;
   width: 15px;
   margin: 0 2px;
@@ -161,13 +176,23 @@
 }
 
 @-webkit-keyframes fade {
-  from {opacity: 0.4;}
-  to {opacity: 1;}
+  from {
+    opacity: 0.4;
+  }
+  
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fade {
-  from {opacity: 0.4;}
-  to {opacity: 1;}
+  from {
+    opacity: 0.4;
+  }
+  
+  to {
+    opacity: 1;
+  }
 }
 
 /* Gallery */

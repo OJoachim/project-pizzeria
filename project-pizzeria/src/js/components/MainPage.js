@@ -93,8 +93,46 @@ class MainPage {
       console.log('text', text);
       
       const author = theCurentOpinion.author;
-      console.log('author', author);     
+      console.log('author', author);
       
+      // a propper opinion, got from server put into opinion wrapper in index.html
+      const opinionElements = document.querySelectorAll('.opinion-element');
+      console.log('opinionElements', opinionElements);
+      
+      for (let opinionElement of opinionElements){
+        
+        //TITLE
+        const titleOpinionElements = document.querySelectorAll('.opinion-title');
+        console.log('titleOpinionElements', titleOpinionElements);
+        for(let titleOpinionElement of titleOpinionElements){
+          let html = '';
+          const titleOpinionHTML = title;
+          console.log('theOpinionHTML', titleOpinionHTML);
+          html = html + titleOpinionHTML;
+          titleOpinionElement.innerHTML = html;
+        }
+        
+        //TEXT
+        const textOpinionElements = document.querySelectorAll('.opinion-text');
+        for(let textOpinionElement of textOpinionElements){
+          let html = '';
+          const textOpinionHTML = text;
+          html = html + textOpinionHTML;
+          textOpinionElement.innerHTML = html;
+        }
+        
+        //AUTHOR
+        const authorOpinionElements = document.querySelectorAll('.opinion-author');
+        console.log('authorOpinionElements', authorOpinionElements);
+        for(let authorOpinionElement of authorOpinionElements){
+          let html = '';
+          const authorOpinionHTML = author;
+          console.log('authorOpinionHTML', authorOpinionHTML);
+          html = html + authorOpinionHTML;
+          authorOpinionElement.innerHTML = html;
+          
+        }
+      }
     }
   }
 
@@ -108,18 +146,18 @@ class MainPage {
 
     function showSlides() {
       var i;
-      const slides = document.getElementsByClassName("slides");
-      const dots = document.getElementsByClassName("dot");
+      const slides = document.getElementsByClassName('slides');
+      const dots = document.getElementsByClassName('dot');
       for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+        slides[i].style.display = 'none';  
       }
       slideIndex++;
-      if (slideIndex > slides.length) {slideIndex = 1}    
+      if (slideIndex > slides.length) {slideIndex = 1;}    
       for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+        dots[i].className = dots[i].className.replace(' active', '');
       }
-      slides[slideIndex-1].style.display = "block";  
-      dots[slideIndex-1].className += " active";
+      slides[slideIndex-1].style.display = 'block';  
+      dots[slideIndex-1].className += ' active';
       setTimeout(showSlides, 2500);
     }
   }
@@ -138,16 +176,6 @@ export default MainPage;
         const opinionElementNr = opinionAtributteNr.replace('wrapper-', '');
         console.log('opinionElementNr', opinionElementNr);
       }
-/////////////////////////////////////////
-prepareDots(){
-    //const thisMainPage = this;
-    const ul = document.createElement('ul');
-    ul.classList.add('.opinion-dots');
-    
-    const li = document.createElement('li');
-    li.classList.add('.opinion-dot');
-  }
-*/
 
 //const opinionNr = opinionWrapper.getAttribute('data');
 //const opinionDataNr = opinionNr.replace('wrapper-', '');
@@ -175,9 +203,4 @@ prepareDots(){
             const opinionTitle = titleWrapper.title;
             console.log('opinionTitle', titleWrapperItem);
           }
-          
-  //const slide = new Slider('#slider', {
-    //generateDots: true,
-    //pauseTime: 10000,
-    //});
-*/    
+ */
