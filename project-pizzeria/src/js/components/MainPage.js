@@ -53,7 +53,7 @@ class MainPage {
   }
   
   getData(){
-    //const thisMainPage = this;
+    const thisMainPage = this;
     const url = settings.db.url + '/' + settings.db.opinion;
     
     fetch(url)
@@ -62,32 +62,122 @@ class MainPage {
       })
       .then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
+        thisMainPage.opinions = parsedResponse;
+        thisMainPage.prepareOpinions();
         return parsedResponse;
       });
-      
+    
   }
   
-  //const opinion = {
-  //title: thisMainPage.title,
-  //text: thisMainPage.text,
-  //author: thisMainPage.author,
-  //}
-  
+  prepareOpinions(){
+    const thisMainPage = this;
+    console.log('thisMainPage.opinion', thisMainPage.opinions);
+    const allOpinions = thisMainPage.opinions;
+     
+    for (let theCurentOpinion of allOpinions){ // one = curent opinion of the all opinions got from server
+      console.log('theCurentOpinion', theCurentOpinion); // show in console the all content of the object: theCurentOpinion
+      
+      /*
+      for (let theCurentOpinionItem in theCurentOpinion){
+        console.log('theCurentOpinionItem', theCurentOpinionItem); // show all kinds of items: id, title, text, author...
+      }
+      */
+      
+      const id = theCurentOpinion.id;
+      console.log('id', id);
+      
+      const title = theCurentOpinion.title;
+      console.log('title', title);
+      
+      const text = theCurentOpinion.text;
+      console.log('text', text);
+      
+      const author = theCurentOpinion.author;
+      console.log('author', author);     
+      
+    }
+  }
+
   makeCarousel(){
     /* eslint-disable-next-line no-unused-vars */
-    const thisMainPage = this;    
-    const element = document.querySelector('.carousel-cell');
-    /* eslint-disable-next-line no-unused-vars */
-    const flkty = new Flickity(element, 
-      {
-      // options:
-        autoPlay: true, // advance cells every 3 seconds
-        wrapAround: true,
-        contain: true,
-        draggable: true,
-        //prevNextButtons: false,
-      });
+    const thisMainPage = this;
+    
+    //make slides show:
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+      var i;
+      const slides = document.getElementsByClassName("slides");
+      const dots = document.getElementsByClassName("dot");
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slideIndex++;
+      if (slideIndex > slides.length) {slideIndex = 1}    
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";  
+      dots[slideIndex-1].className += " active";
+      setTimeout(showSlides, 2500);
+    }
   }
+  
   
 }
 export default MainPage;
+/*
+/////////////////////////////////////////////
+    // opinion in index.html/wrapper
+      const opinionElements = document.querySelectorAll('.opinion-element');
+      console.log('opinionElements', opinionElements);
+      
+    for (let opinionElement of opinionElements){
+        const opinionAtributteNr = opinionElement.getAttribute('data');
+        const opinionElementNr = opinionAtributteNr.replace('wrapper-', '');
+        console.log('opinionElementNr', opinionElementNr);
+      }
+/////////////////////////////////////////
+prepareDots(){
+    //const thisMainPage = this;
+    const ul = document.createElement('ul');
+    ul.classList.add('.opinion-dots');
+    
+    const li = document.createElement('li');
+    li.classList.add('.opinion-dot');
+  }
+*/
+
+//const opinionNr = opinionWrapper.getAttribute('data');
+//const opinionDataNr = opinionNr.replace('wrapper-', '');
+//console.log('opinionDataNr', opinionDataNr);
+//if(titleDataNr === id){
+//const showTitle = title(id);
+//console.log('showTitle', showTitle);
+//}
+/*
+//const opinionTitle = opinionWrapper.title;
+          //opinionTitle.innerHTML = title;
+          //opinionWrapper.title = title;
+          
+          const opinionText = opinionWrapper.text;
+          opinionWrapper.text = text;
+          
+          const opinionAuthor = opinionWrapper.author;
+          opinionWrapper.author = author;
+          
+          //console.log('opinionWrapper.title', opinionWrapper.title);
+          //console.log('opinionWrapper.text', opinionWrapper.text);
+          
+          
+          for (let titleWrapperItem in titleWrapper){
+            const opinionTitle = titleWrapper.title;
+            console.log('opinionTitle', titleWrapperItem);
+          }
+          
+  //const slide = new Slider('#slider', {
+    //generateDots: true,
+    //pauseTime: 10000,
+    //});
+*/    

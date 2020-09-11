@@ -12,8 +12,6 @@ class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.choiseOfTable();
-    thisBooking.changeRangeSliderColor();
-    
     //console.log('thisBooking', thisBooking);
     //console.log('bookingElement', bookingElement);
   }
@@ -123,6 +121,7 @@ class Booking {
   
   updateDOM(){
     const thisBooking = this;
+    thisBooking.changeRangeSliderColor();
     
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
@@ -262,16 +261,19 @@ class Booking {
     const thisBooking = this;
     
     thisBooking.date = thisBooking.datePicker.value;
-    const bookedHours = thisBooking.booked[thisBooking.date];
+    const currentDay = thisBooking.booked[thisBooking.date] || {};
+    
     thisBooking.dom.rangeSlider = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.slider); //.rangeSlider
     
-    // table= a booked table;    booked 1/3=33%; 2/3=66%; 3/3 100%;
     const tableAmount = []; //all booked tables
-    const hour = thisBooking.hourPicker.value; //the booked hours
+    const bookableHours = [];
+
+    for(let hour = settings.hours.open; hour < settings.hours.close; hour += 0.5) {
+      bookableHours.push(hour);
+    }
     
-    //bookedHours = thisBooking.booked[thisBooking.date];
-    for(let hour of bookedHours){
-      if (!thisBooking.booked[thisBooking.date][hour]) {
+    for(let hour of bookableHours){
+      if (!currentDay[hour]) {
         tableAmount.push(0);
       } else {
         tableAmount.push(thisBooking.booked[thisBooking.date][hour].length);
@@ -280,43 +282,27 @@ class Booking {
     
     const colors = [];
     
-    //open at 12 and closed at 24pm, min duration 0.5
-    for (let hour = 12; hour < 24; hour += 0.5){
-       
-      const concentration1 = (hour - 12)*100/12; //(12-12=0; 22-12=10 10*100/12=83%; 24-12=12*100/12=100%)
-      const concentration2 = ((hour - 12) + 0.5)*100/12; //(12.5-12=0.5*100/12=4%; 11,5*100/12=96%)
-      
-      for (let table of tableAmount){
-        if(table === 3){
-          colors.push(hour + 'red' + concentration1 + '%', 'red' + concentration2 + '%');
-        } else if (table === 2){
-          colors.push(hour + 'red' + concentration1 + '%', 'yellow' + concentration2 + '%');
-        } else {
-          colors.push(hour + 'red' + concentration1 + '%', 'green' + concentration2 + '%');
-        }
+    const diff = 4;
+    let percentStart = 0;
+    let percentEnd = diff;
+
+    for(let hourTables of tableAmount) {
+      if(hourTables === 3){
+        colors.push(`red ${percentStart}% ${percentEnd}%`);
+      } else if (hourTables === 2){
+        colors.push(`orange ${percentStart}% ${percentEnd}%`);
+      } else {
+        colors.push(`green ${percentStart}% ${percentEnd}%`);
       }
+      percentStart = percentStart + diff;
+      percentEnd = percentEnd + diff;
     }
-    //colors = [red, yellow, green]
-    //colors.sort();
-    //const col = colors.join(); ---  red,yellow,green
-    colors.sort();  //
-    const fillPickerByColors = colors.join();
+
+    const fillPickerByColors = colors.join(', ');
     const slider = thisBooking.dom.rangeSlider;
-    slider.style.background = 'linear-gradient(to right' + fillPickerByColors + ')';
+    slider.style.background = 'linear-gradient(to right, ' + fillPickerByColors + ')';   
   }//END
   
 }
 
 export default Booking;
-
-/*
-    for (let table of tableAmount){
-      if(table === 3){
-        theColors.push('red');
-      } else if (table === 2){
-        theColors.push('yellow');
-      } else {
-        theColors.push('green');
-      }
-    }
-*/
