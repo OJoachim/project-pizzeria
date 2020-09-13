@@ -1,5 +1,5 @@
 #main-page {
-  backgraund: #dd9d90;
+  background-color: #f1f1f1;
 }
 
 .main-page-wrapper {
@@ -92,12 +92,10 @@
   @include flex(row, center, space-between);
   margin: 70px 0 0 0;
   overflow: hidden;
-  border: 1px solid blue;
 }
 
 .carousel-image-wrapper {
   width: 100%;
-  border: 1px solid yellow;
 }
 
 .carousel-image-wrapper img {
@@ -115,7 +113,6 @@
   margin-left: 28px;
   width: 100%;
   background-color: transparent;
-  border: 1px solid red;
 }
 
 /* --------Slideshow container---------- */
@@ -199,7 +196,7 @@
 .gallery-wrapper {
   @include flex(row, center, center);
   flex-wrap: wrap;
-  margin-top: 70px;
+  margin-top: 60px;
 }
 
 .gal-image-wrapper {
