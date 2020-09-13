@@ -79,12 +79,14 @@
       height: ($base-size * 2);
       top: -6px;
       background: $color-dark;
+      opacity: 0.7;
+      border: 2px solid blue;
     }
   }
   
   &__fill {
     background: $color-success;
-    opacity: 0.4;
+    opacity: 0.7;
     transition-timing-function: cubic-bezier(0, 1, 0, 1);
     transition: width 100ms;
     box-shadow: none;
