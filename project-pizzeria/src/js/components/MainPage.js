@@ -14,6 +14,7 @@ class MainPage {
   } 
   
   makeLinksActive(){  //make nav-link: nav-link-order & nav-link-booking active at the 'click' moment
+    /* eslint-disable-next-line no-unused-vars */
     const thisMainPage = this;
         
     const linkOrder = document.querySelector('.nav-link-order');
