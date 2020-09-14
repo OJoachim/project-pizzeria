@@ -132,8 +132,7 @@ export const settings = {
     dateEndParamKey: 'date_lte',
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
-    opinion: 'opinion',
-      
+    opinion: 'opinion',   
     title: '.title',
     text: '.text',
     author: '.author',
